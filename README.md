@@ -7,5 +7,7 @@
 
 
 python --version (>3.5)
+
 pip3 install telethon 
+
 python -m pip install pymongo
