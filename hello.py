@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
-# перед выполнением войти в аккаунт на https://cloud.mongodb.com/v2/64307490cb24c97c9638b0c4#/clusters и нажать "add current ip qdresse"
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
+
 uri = "mongodb+srv://anna:1AQ2ZS3ED@cluster0.fnbrrzu.mongodb.net/?retryWrites=true&w=majority"
 # импортирует объект MongoClient из PyMongo, создает экземпляр клиента :
 clientDB = MongoClient(uri, server_api=ServerApi('1')) 
@@ -11,6 +14,10 @@ try:
     print("You successfully connected to MongoDB")
 except Exception as e:
     print(e)
+
+print(os.environ)
+#os.getenv
+
 
 # messagesDB = clientDB["messsagesBD"]
 # collections = messagesDB.list_collection_names()
