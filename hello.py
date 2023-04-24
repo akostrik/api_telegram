@@ -3,8 +3,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from dotenv import load_dotenv
-load_dotenv()  # take environment variables from .env.
+print("MONGO_URI = " + MONGO_URI)
 
 uri = "mongodb+srv://anna:1AQ2ZS3ED@cluster0.fnbrrzu.mongodb.net/?retryWrites=true&w=majority"
 # импортирует объект MongoClient из PyMongo, создает экземпляр клиента :
