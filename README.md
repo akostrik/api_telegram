@@ -14,7 +14,8 @@ python -m pip install pymongo
 
 Create file file.env:
 ```
-TG_ID=ABC123
-TG_PWD=SUPERSECRET123
-MONGO_ID=
-MONGO_PWD=```
+TG_ID=telegrqm_id
+TG_PWD=telegram_password
+MONGO_ID=mongodb_id
+MONGO_PWD=mongodg_password
+```
