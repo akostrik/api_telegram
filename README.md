@@ -11,3 +11,9 @@ python --version (>3.5)
 pip3 install telethon 
 
 python -m pip install pymongo
+
+Create file file.env:
+```TG_ID=ABC123
+TG_PWD=SUPERSECRET123
+MONGO_ID=
+MONGO_PWD=```
