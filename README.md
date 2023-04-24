@@ -12,7 +12,7 @@ pip3 install telethon
 
 python -m pip install pymongo
 
-Create file file.env:
+Create file named ".env":
 ```
 TG_ID=telegrqm_id
 TG_PWD=telegram_password
