@@ -2,41 +2,34 @@
 
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import os
+from dotenv import load_dotenv, find_dotenv
 
-print("MONGO_URI = " + MONGO_URI)
+load_dotenv(find_dotenv()) # take env variables from .env
+MONGO_URI1 = os.environ.get("MONGO_URI1")
+MONGO_ID   = os.environ.get("MONGO_ID")
+MONGO_PWD  = os.environ.get("MONGO_PWD")
+MONGO_URI2 = os.environ.get("MONGO_URI2")
+MONGO_URI  = MONGO_URI1 + MONGO_ID + ':' + MONGO_PWD + MONGO_URI2
 
-uri = "mongodb+srv://anna:1AQ2ZS3ED@cluster0.fnbrrzu.mongodb.net/?retryWrites=true&w=majority"
 # импортирует объект MongoClient из PyMongo, создает экземпляр клиента :
-clientDB = MongoClient(uri, server_api=ServerApi('1')) 
+clientDB = MongoClient(MONGO_URI, server_api=ServerApi('1')) 
 try:
     clientDB.admin.command('ping')
     print("You successfully connected to MongoDB")
 except Exception as e:
     print(e)
 
-print(os.environ)
-#os.getenv
+messagesDB = clientDB["messsagesBD"]
+collections = messagesDB.list_collection_names()
+collection_msg = messagesDB.messages
 
-
-# messagesDB = clientDB["messsagesBD"]
-# collections = messagesDB.list_collection_names()
-# print('\ncollections : ')
-# print(collections)
-
-# collection1 = messagesDB.collection1
-# print('\ncollection : ')
-# print(collection1)
-
-#message = {
-#"text": "text message 1",	
-#"date": "2023-04-14",
-#}
-#id = collection1.insert_one(message).inserted_id
-#print('\nid inserted message : ')
-#print(id)
-
-# print('\ncollection.find_one : ')
-# print(collection.find_one({"Created": "collection1"}))
+msg = {
+"text": "message from ann",	
+"date": "2023-04-25",
+}
+id = collection_msg.insert_one(msg).inserted_id
+print('\nid inserted message : ' + str(id))
 
 
 # import asyncio
@@ -45,7 +38,7 @@ print(os.environ)
 # api_id = 356016
 # api_hash = 'a8eb9553bc3789a544de55cc91912716'
 # clientTG = TelegramClient('anon', api_id, api_hash)
-# #channel = 'stalin_gulag'
+# #channel = 'good_channel'
 # group = 'blues34'
 
 # async def func():
