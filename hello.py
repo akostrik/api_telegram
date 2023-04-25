@@ -36,7 +36,7 @@ collections     = messagesDB.list_collection_names()
 collection_msgs = messagesDB.messages
 
 
-# READ TG MESSAGES, PUT THEM IM MONGO DB:
+# READ TG MESSAGES, PUT THEM IN MONGO DB:
 async def func_read_insert():
 	tg_account = await clientTG.get_me()
 	print('You successfully connected to Telegram as user ' + str(tg_account.phone))
@@ -44,7 +44,7 @@ async def func_read_insert():
 	async for msgTG in clientTG.iter_messages(channel):
 		msgBD = {
 		"text": msgTG.text,
-		"date": "2023-04-25",
+		"date": msgTG.date,
 		}
 		if msgTG.text != None:
 			collection_msgs.insert_one(msgBD)
