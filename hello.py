@@ -1,53 +1,57 @@
 #!/usr/bin/python
+import os
+import asyncio
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv()) # take env variables from .env
 
+
+# TELEGRAM ACCES:
+from telethon import TelegramClient
+ID_TG   = os.environ.get("ID_TG")
+HASH_TG = os.environ.get("HASH_TG")
+clientTG = TelegramClient('anon', ID_TG, HASH_TG)
+channel = 'good_channel'
+
+
+# MONGO DB ACCES:
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import os
-from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv()) # take env variables from .env
-MONGO_URI1 = os.environ.get("MONGO_URI1")
-MONGO_ID   = os.environ.get("MONGO_ID")
-MONGO_PWD  = os.environ.get("MONGO_PWD")
-MONGO_URI2 = os.environ.get("MONGO_URI2")
-MONGO_URI  = MONGO_URI1 + MONGO_ID + ':' + MONGO_PWD + MONGO_URI2
+URI1_BD = os.environ.get("URI1_BD")
+ID_BD   = os.environ.get("ID_BD")
+PWD_BD  = os.environ.get("PWD_BD")
+URI2_BD = os.environ.get("URI2_BD")
+uriBD   = URI1_BD + ID_BD + ':' + PWD_BD + URI2_BD
 
 # импортирует объект MongoClient из PyMongo, создает экземпляр клиента :
-clientDB = MongoClient(MONGO_URI, server_api=ServerApi('1')) 
+clientDB = MongoClient(uriBD, server_api=ServerApi('1')) 
 try:
-    clientDB.admin.command('ping')
-    print("You successfully connected to MongoDB")
+	clientDB.admin.command('ping')
+	print("You successfully connected to MongoDB")
 except Exception as e:
-    print(e)
+	print(e)
 
-messagesDB = clientDB["messsagesBD"]
-collections = messagesDB.list_collection_names()
-collection_msg = messagesDB.messages
-
-msg = {
-"text": "message from ann",	
-"date": "2023-04-25",
-}
-id = collection_msg.insert_one(msg).inserted_id
-print('\nid inserted message : ' + str(id))
+messagesDB      = clientDB["messsagesBD"]
+collections     = messagesDB.list_collection_names()
+collection_msgs = messagesDB.messages
 
 
-# import asyncio
-# from telethon import TelegramClient
+# READ TG MESSAGES, PUT THEM IM MONGO DB:
+async def func_read_insert():
+	tg_account = await clientTG.get_me()
+	print('You successfully connected to Telegram as user ' + str(tg_account.phone))
+	#await clientTG.send_message(channel, 'Hello from python')
+	async for msgTG in clientTG.iter_messages(channel):
+		msgBD = {
+		"text": msgTG.text,
+		"date": "2023-04-25",
+		}
+		if msgTG.text != None:
+			collection_msgs.insert_one(msgBD)
+with clientTG:
+	clientTG.loop.run_until_complete(func_read_insert())
 
-# api_id = 356016
-# api_hash = 'a8eb9553bc3789a544de55cc91912716'
-# clientTG = TelegramClient('anon', api_id, api_hash)
-# #channel = 'good_channel'
-# group = 'blues34'
 
-# async def func():
-# 	me = await clientTG.get_me()
-# 	print('I am telegram user: ' + me.username + ' ' + me.phone)
-# 	await clientTG.send_message(group, 'Hello from python')
-# 	async for message in clientTG.iter_messages(group):
-# 		print(message.id, message.text)
-# 		messagesDB.users.insert(message)
-# with clientTG:
-# 	clientTG.loop.run_until_complete(func())
+
+
 
