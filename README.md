@@ -14,7 +14,7 @@ pip3 install telethon
 
 python -m pip install pymongo
 
-pip: pip install openai
+pip install openai
 
 Create file named ".env":
 ```
