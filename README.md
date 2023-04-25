@@ -8,7 +8,7 @@ INSTALLATION
 4) presse "add current ip adresse"
 
 
-python --version (>3.5)
+python version >= 3.5
 
 pip3 install telethon 
 
