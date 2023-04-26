@@ -23,7 +23,7 @@ TG_PWD=telegram_password
 MONGO_ID=mongodb_id
 MONGO_PWD=mongodg_password
 ```
-During the first Tekegram connection:
+During the first Telegram connection:
 
 Please enter your phone (or bot token): ...
 
