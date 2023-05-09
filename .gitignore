@@ -1,4 +1,4 @@
-file.env
+.env
 anon.session
-code/file.env
-code/anon.sessin
+code/.env
+code/anon.session
