@@ -1,32 +1,27 @@
-# api_telegram
-
 INSTALLATION
 
-python version >= 3.5
+python version >= 3.5 <br>
+telethon 
 
+pymongo
 
-pip3 install telethon 
-
-python -m pip install pymongo
-
-pip install openai
+openai
 
 Create file named ".env":
 ```
-TG_ID=telegrqm_id
-TG_PWD=telegram_password
-MONGO_ID=mongodb_id
-MONGO_PWD=mongodg_password
+ID_TG=...
+HASH_TG=...
+PRF_MONGO=mongodb+srv://
+ID_MONGO=...
+PWD_MONGO=...
+SUF_MONGO=@cluster0.fnbrrzu.mongodb.net/?retryWrites=true&w=majority
 KEY_OPENAI=...
+
 ```
 
 1) go there https://cloud.mongodb.com
-2) sign in
+2) sign in with mail anna.kostrikova.upmc (at) gmail.com
 3) go https://cloud.mongodb.com/v2/64307490cb24c97c9638b0c4#/clusters 
 4) presse "add current ip adresse"
 
-During the first Telegram connection:
-
-Please enter your phone (or bot token): ...
-
-Please enter the code you received: ...
+During the first Telegram connection enter your phone and the code you received.

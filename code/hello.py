@@ -23,8 +23,6 @@ PRF_MG = str(os.environ.get("PRF_MG"))
 ID_MG  = str(os.environ.get("ID_MG"))
 PWD_MG = str(os.environ.get("PWD_MG"))
 SUF_MG = str(os.environ.get("SUF_MG"))
-#uriMG   = PREF_MG + ID_MG + ':' + PWD_MG + SUFF_MG
-
 uriMG   = PRF_MG+ID_MG+":" + urllib.parse.quote(PWD_MG) + SUF_MG
 print (uriMG)
 
@@ -57,12 +55,12 @@ async def func_read_insert():
 	async for msgTG in clientTG.iter_messages(channel):
 		if msgTG.text != None:
 			text = " “”” " + msgTG.text + " “”” "
-			summary = openai.Completion.create(engine=model_engine, prompt="Give me a very short summary, as short as possible, of this text (no more than 15 words please)" + text).choices[0].text
-			msgBD = {
-			"text"   : msgTG.text,
-			"date"   : msgTG.date,
-			"summary": summary,
-			}
+			summary = openai.Completion.create(engine=model_engine, prompt="Give me a very short summary, as short as possible, of this text (no more than 15 words please), in English" + text).choices[0].text
+#			msgBD = {
+#			"text"   : msgTG.text,
+#			"date"   : msgTG.date,
+#			"summary": summary,
+#			}
 			collection_msgs.insert_one(msgBD)
 with clientTG:
 	clientTG.loop.run_until_complete(func_read_insert())
