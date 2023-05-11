@@ -1,8 +1,10 @@
-INSTALLATION <br>
-python version >= 3.5 <br>
-telethon  <br>
-pymongo <br>
-openai <br>
+Install python version >= 3.5 <br>
+pip3 install --upgrade requests
+Install telethon  <br>
+Install pymongo <br>
+Install openai <br>
+# pip install streamlit
+# pip3 install --upgrade requests
 
 Create file named ".env":
 ```
@@ -17,8 +19,8 @@ KEY_OPENAI=...
 
 
 1) go there https://cloud.mongodb.com 
-2) sign in with mail anna.kostrikova.upmc (at) gmail.com 
-3) go https://cloud.mongodb.com/v2/64307490cb24c97c9638b0c4#/clusters 
+2) sign in with mail stage.mongodb (at) gmail.com 
+3) go https://cloud.mongodb.com/v2/645bc6f017f8f46e1023dd82#/clusters 
 4) presse "add current ip adresse"
 
 During the first Telegram connection enter your phone and the code you received.
