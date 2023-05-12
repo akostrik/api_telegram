@@ -3,6 +3,7 @@ pip3 install --upgrade requests
 Install telethon  <br>
 Install pymongo <br>
 Install openai <br>
+pip install --upgrade numpy
 # pip install streamlit
 # pip3 install --upgrade requests
 
